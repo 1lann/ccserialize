@@ -55,8 +55,8 @@ func structSerialize(input interface{}) string {
 			keyName = str.Field(i).Tag.Get("ccserialize")
 		}
 
-		serializedString = serializedString + "[\"" + strings.ToLower() + "\"] = "
-		serializedString = serializedString + Serialize(f.Interface()) + ", "
+		serializedString = serializedString + "[\"" + strings.ToLower(keyName) + "\"]="
+		serializedString = serializedString + Serialize(f.Interface()) + ","
 	}
 
 	return serializedString + "}"
@@ -65,7 +65,7 @@ func structSerialize(input interface{}) string {
 func arraySerialize(input []interface{}) string {
 	serializedString := "{"
 	for k, v := range input {
-		serializedString = serializedString + "[" + strconv.Itoa(k+1) + "] = " + Serialize(v) + ", "
+		serializedString = serializedString + "[" + strconv.Itoa(k+1) + "]=" + Serialize(v) + ","
 	}
 	return serializedString + "}"
 }
@@ -73,7 +73,7 @@ func arraySerialize(input []interface{}) string {
 func mapSerialize(input map[string]interface{}) string {
 	serializedString := "{"
 	for k, v := range input {
-		serializedString = serializedString + "[\"" + k + "\"] = " + Serialize(v) + ", "
+		serializedString = serializedString + "[\"" + k + "\"]=" + Serialize(v) + ","
 	}
 	return serializedString + "}"
 }

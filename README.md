@@ -6,25 +6,31 @@ textutils.serialize from ComputerCraft implemented in Go. Can be used on string 
 ```go
 package main
 
-import "github.com/1lann/cc-serialize"
+import (
+    "fmt"
+    "github.com/1lann/ccserialize"
+)
 
 type Test struct {
-  Name string
-  Age int
-  SomeNumbers []int
+    Name          string
+    Age           int
+    SomeNumbers   []int
+    StructTagging string `ccserialize:"pet"`
 }
 
 func main() {
-  test := Test{
-    Name: "John Smith",
-    Age: 28,
-    SomeNumbers: []int{1, 2, 3, 4, 5},
-  }
+    test := Test{
+        Name:          "John Smith",
+        Age:           28,
+        SomeNumbers:   []int{1, 2, 3, 4, 5},
+        StructTagging: "Dog",
+    }
 
-  ccserialize.Serialize(test)
-  // Returns
-  // {["name"] = "John Smith", ["age"] = 28, ["somenumbers"] = {[1] = 1, [2] = 2, [3] = 3, [4] = 4, [5] = 5, }, }
+    fmt.Println(ccserialize.Serialize(test))
+    // Outputs
+    // {["name"]="John Smith",["age"]=28,["somenumbers"]={[1]=1,[2]=2,[3]=3,[4]=4,[5]=5,},["pet"]="Dog",}
 }
+
 ```
 
 ## License (Unlicense)
