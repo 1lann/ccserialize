@@ -50,7 +50,12 @@ func structSerialize(input interface{}) string {
 	str := reflect.TypeOf(input)
 	for i := 0; i < str.NumField(); i++ {
 		f := intStr.Field(i)
-		serializedString = serializedString + "[\"" + strings.ToLower(str.Field(i).Name) + "\"] = "
+		keyName := str.Field(i).Name
+		if str.Field(i).Tag.Get("ccserialize") != "" {
+			keyName = str.Field(i).Tag.Get("ccserialize")
+		}
+
+		serializedString = serializedString + "[\"" + strings.ToLower() + "\"] = "
 		serializedString = serializedString + Serialize(f.Interface()) + ", "
 	}
 
