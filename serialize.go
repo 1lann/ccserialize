@@ -10,6 +10,18 @@ func Serialize(input interface{}) string {
 	switch reflect.ValueOf(input).Kind() {
 	case reflect.Int:
 		return strconv.Itoa(input.(int))
+	case reflect.Uint8:
+		return Serialize(int(input.(uint8)))
+	case reflect.Int8:
+		return Serialize(int(input.(int8)))
+	case reflect.Uint16:
+		return Serialize(int(input.(uint16)))
+	case reflect.Int16:
+		return Serialize(int(input.(int16)))
+	case reflect.Uint32:
+		return Serialize(int64(input.(uint32)))
+	case reflect.Int32:
+		return Serialize(int(input.(int32)))
 	case reflect.Int64:
 		return strconv.FormatInt(input.(int64), 10)
 	case reflect.Float64:
