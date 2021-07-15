@@ -67,7 +67,7 @@ func structSerialize(input interface{}) string {
 			keyName = str.Field(i).Tag.Get("ccserialize")
 		}
 
-		if keyName == "-" || !f.CanInterface() || !f.CanSet() {
+		if keyName == "-" || !f.CanInterface() {
 			continue
 		}
 
